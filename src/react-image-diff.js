@@ -89,6 +89,16 @@ class ImageDiff extends Component {
       height,
       width,
     } = this.getScaledDimensions();
+    const {
+      width: _width,   // not used
+      height: _height, // not used
+      after: _after,   // not used
+      before: _before, // not used
+      type: _type,     // not used
+      value: _value,   // not used
+      style,
+      ...otherProps,
+    } = this.props;
     return (
       <div
         className='ImageDiff'
@@ -96,7 +106,9 @@ class ImageDiff extends Component {
           display: 'inline-block',
           height,
           width,
+          ...style,
         }}
+        {...otherProps}
       >
         {this.props.type === 'difference' ? this.renderDifference(height, width) : null}
         {this.props.type === 'fade' ? this.renderFade(height, width) : null}

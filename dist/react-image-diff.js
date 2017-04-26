@@ -70,6 +70,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -231,16 +233,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	          height = _getScaledDimensions.height,
 	          width = _getScaledDimensions.width;
 
+	      var _props2 = this.props,
+	          _width = _props2.width,
+	          _height = _props2.height,
+	          _after = _props2.after,
+	          _before = _props2.before,
+	          _type = _props2.type,
+	          _value = _props2.value,
+	          style = _props2.style,
+	          otherProps = _objectWithoutProperties(_props2, ['width', 'height', 'after', 'before', 'type', 'value', 'style']);
+
 	      return _react2.default.createElement(
 	        'div',
-	        {
+	        _extends({
 	          className: 'ImageDiff',
-	          style: {
+	          style: _extends({
 	            display: 'inline-block',
 	            height: height,
 	            width: width
-	          }
-	        },
+	          }, style)
+	        }, otherProps),
 	        this.props.type === 'difference' ? this.renderDifference(height, width) : null,
 	        this.props.type === 'fade' ? this.renderFade(height, width) : null,
 	        this.props.type === 'swipe' ? this.renderSwipe(height, width) : null
