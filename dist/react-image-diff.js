@@ -70,6 +70,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -86,13 +88,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var _this = _possibleConstructorReturn(this, (ImageDiff.__proto__ || Object.getPrototypeOf(ImageDiff)).call(this));
 
-	    _this.renderFade = function () {
+	    _this.renderFade = function (height, width) {
 	      var style = {
 	        backgroundImage: 'url(' + bgImage + ')',
-	        height: _this.state.height,
+	        height: height,
 	        margin: 0,
 	        position: 'absolute',
-	        width: _this.state.width
+	        width: width
 	      };
 
 	      var beforeStyle = _extends({
@@ -112,9 +114,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	          { className: 'ImageDiff__before', style: beforeStyle },
 	          _react2.default.createElement('img', {
 	            src: _this.props.before,
-	            height: _this.props.height,
-	            width: _this.props.width,
-	            onLoad: _this.handleImgLoad
+	            style: {
+	              maxHeight: height,
+	              maxWidth: width
+	            },
+	            onLoad: function onLoad(e) {
+	              return _this.handleImgLoad(e, 'Before');
+	            }
 	          })
 	        ),
 	        _react2.default.createElement(
@@ -122,61 +128,129 @@ return /******/ (function(modules) { // webpackBootstrap
 	          { className: 'ImageDiff__after', style: afterStyle },
 	          _react2.default.createElement('img', {
 	            src: _this.props.after,
-	            height: _this.props.height,
-	            width: _this.props.width,
-	            onLoad: _this.handleImgLoad
+	            style: {
+	              maxHeight: height,
+	              maxWidth: width
+	            },
+	            onLoad: function onLoad(e) {
+	              return _this.handleImgLoad(e, 'After');
+	            }
 	          })
 	        )
 	      );
 	    };
 
 	    _this.handleImgLoad = _this.handleImgLoad.bind(_this);
+	    _this.getScaledDimensions = _this.getScaledDimensions.bind(_this);
+
+	    _this.state = {
+	      naturalWidthBefore: null,
+	      naturalHeightBefore: null,
+	      naturalWidthAfter: null,
+	      naturalHeightAfter: null
+	    };
 	    return _this;
 	  }
 
 	  _createClass(ImageDiff, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.setState({
-	        height: this.props.height,
-	        width: this.props.width
-	      });
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      this.setState({
-	        height: nextProps.height || this.state.height,
-	        width: nextProps.width || this.state.width
-	      });
-	    }
-	  }, {
 	    key: 'handleImgLoad',
-	    value: function handleImgLoad(e) {
-	      if (!this.props.height && !this.props.width) {
-	        var _e$target = e.target,
-	            height = _e$target.height,
-	            width = _e$target.width;
+	    value: function handleImgLoad(e, type) {
+	      var _setState;
 
-	        this.setState({
-	          height: height, width: width
-	        });
+	      var _e$target = e.target,
+	          naturalHeight = _e$target.naturalHeight,
+	          naturalWidth = _e$target.naturalWidth;
+
+	      this.setState((_setState = {}, _defineProperty(_setState, 'naturalHeight' + type, naturalHeight), _defineProperty(_setState, 'naturalWidth' + type, naturalWidth), _setState));
+	    }
+	  }, {
+	    key: 'getScaledDimensions',
+	    value: function getScaledDimensions() {
+	      var getDimensions = function getDimensions(maxHeight, maxWidth, naturalHeight, naturalWidth) {
+	        var heightRatio = typeof maxHeight !== 'undefined' ? naturalHeight / maxHeight : 1;
+	        var widthRatio = typeof maxWidth !== 'undefined' ? naturalWidth / maxWidth : 1;
+
+	        // Use max to prevent scaling up the image
+	        var divisor = Math.max(1, widthRatio);
+	        if (widthRatio < heightRatio) {
+	          // fit to height
+	          divisor = Math.max(1, heightRatio);
+	        }
+
+	        return {
+	          width: naturalWidth / divisor,
+	          height: naturalHeight / divisor
+	        };
+	      };
+
+	      var _state = this.state,
+	          naturalWidthBefore = _state.naturalWidthBefore,
+	          naturalHeightBefore = _state.naturalHeightBefore,
+	          naturalWidthAfter = _state.naturalWidthAfter,
+	          naturalHeightAfter = _state.naturalHeightAfter;
+	      var _props = this.props,
+	          maxHeight = _props.width,
+	          maxWidth = _props.height;
+
+
+	      var height = 0;
+	      var width = 0;
+	      var heightBefore = 0;
+	      var widthBefore = 0;
+	      var heightAfter = 0;
+	      var widthAfter = 0;
+
+	      if (naturalHeightBefore && naturalHeightAfter) {
+	        var _getDimensions = getDimensions(maxHeight, maxWidth, naturalHeightBefore, naturalWidthBefore);
+
+	        heightBefore = _getDimensions.height;
+	        widthBefore = _getDimensions.width;
+
+	        var _getDimensions2 = getDimensions(maxHeight, maxWidth, naturalHeightAfter, naturalWidthAfter);
+
+	        heightAfter = _getDimensions2.height;
+	        widthAfter = _getDimensions2.width;
+
+	        height = Math.max(heightBefore, heightAfter);
+	        width = Math.max(widthBefore, widthAfter);
 	      }
+
+	      return {
+	        height: height,
+	        width: width,
+	        heightBefore: heightBefore,
+	        widthBefore: widthBefore,
+	        heightAfter: heightAfter,
+	        widthAfter: widthAfter
+	      };
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _getScaledDimensions = this.getScaledDimensions(),
+	          height = _getScaledDimensions.height,
+	          width = _getScaledDimensions.width;
+
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'ImageDiff', style: { display: 'inline-block', height: this.state.height, width: this.state.width } },
-	        this.props.type === 'difference' ? this.renderDifference() : null,
-	        this.props.type === 'fade' ? this.renderFade() : null,
-	        this.props.type === 'swipe' ? this.renderSwipe() : null
+	        {
+	          className: 'ImageDiff',
+	          style: {
+	            display: 'inline-block',
+	            height: height,
+	            width: width
+	          }
+	        },
+	        this.props.type === 'difference' ? this.renderDifference(height, width) : null,
+	        this.props.type === 'fade' ? this.renderFade(height, width) : null,
+	        this.props.type === 'swipe' ? this.renderSwipe(height, width) : null
 	      );
 	    }
 	  }, {
 	    key: 'renderDifference',
-	    value: function renderDifference() {
+	    value: function renderDifference(height, width) {
+	      var _this2 = this;
+
 	      var style = {
 	        position: 'relative'
 	      };
@@ -195,9 +269,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	          { className: 'ImageDiff__before', style: beforeStyle },
 	          _react2.default.createElement('img', {
 	            src: this.props.before,
-	            height: this.props.height,
-	            width: this.props.width,
-	            onLoad: this.handleImgLoad
+	            style: {
+	              maxHeight: height,
+	              maxWidth: width
+	            },
+	            onLoad: function onLoad(e) {
+	              return _this2.handleImgLoad(e, 'Before');
+	            }
 	          })
 	        ),
 	        _react2.default.createElement(
@@ -205,23 +283,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	          { className: 'ImageDiff__after', style: afterStyle },
 	          _react2.default.createElement('img', {
 	            src: this.props.after,
-	            height: this.props.height,
-	            width: this.props.width,
-	            style: { mixBlendMode: 'difference' },
-	            onLoad: this.handleImgLoad
+	            style: {
+	              maxHeight: height,
+	              maxWidth: width,
+	              mixBlendMode: 'difference'
+	            },
+	            onLoad: function onLoad(e) {
+	              return _this2.handleImgLoad(e, 'After');
+	            }
 	          })
 	        )
 	      );
 	    }
 	  }, {
 	    key: 'renderSwipe',
-	    value: function renderSwipe() {
+	    value: function renderSwipe(height, width) {
+	      var _this3 = this;
+
 	      var style = {
 	        backgroundImage: 'url(' + bgImage + ')',
-	        height: this.state.height,
+	        height: height,
 	        margin: 0,
 	        position: 'absolute',
-	        width: this.state.width
+	        width: width
 	      };
 
 	      var beforeStyle = _extends({
@@ -235,12 +319,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      var swiperStyle = {
 	        borderLeft: '1px solid #999',
-	        height: this.state.height + 2,
+	        height: height + 2,
 	        margin: 0,
 	        overflow: 'hidden',
 	        position: 'absolute',
 	        right: -2,
-	        width: this.state.width * (1 - this.props.value)
+	        width: width * (1 - this.props.value)
 	      };
 
 	      return _react2.default.createElement(
@@ -251,9 +335,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	          { className: 'ImageDiff__before', style: beforeStyle },
 	          _react2.default.createElement('img', {
 	            src: this.props.before,
-	            height: this.props.height,
-	            width: this.props.width,
-	            onLoad: this.handleImgLoad
+	            style: {
+	              maxHeight: height,
+	              maxWidth: width
+	            },
+	            onLoad: function onLoad(e) {
+	              return _this3.handleImgLoad(e, 'Before');
+	            }
 	          })
 	        ),
 	        _react2.default.createElement(
@@ -264,9 +352,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	            { className: 'ImageDiff__after', style: afterStyle },
 	            _react2.default.createElement('img', {
 	              src: this.props.after,
-	              height: this.props.height,
-	              width: this.props.width,
-	              onLoad: this.handleImgLoad
+	              style: {
+	                maxHeight: height,
+	                maxWidth: width
+	              },
+	              onLoad: function onLoad(e) {
+	                return _this3.handleImgLoad(e, 'After');
+	              }
 	            })
 	          )
 	        )
