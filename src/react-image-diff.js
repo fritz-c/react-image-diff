@@ -104,6 +104,7 @@ class ImageDiff extends Component {
         className='ImageDiff'
         style={{
           display: 'inline-block',
+          position: 'relative',
           height,
           width,
           ...style,

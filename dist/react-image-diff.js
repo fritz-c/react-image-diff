@@ -249,6 +249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          className: 'ImageDiff',
 	          style: _extends({
 	            display: 'inline-block',
+	            position: 'relative',
 	            height: height,
 	            width: width
 	          }, style)
