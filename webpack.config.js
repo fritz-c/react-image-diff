@@ -1,22 +1,22 @@
 module.exports = {
-  entry: './src/react-image-diff.js',
+  entry: './src/react-image-diff.jsx',
   output: {
     filename: './dist/react-image-diff.js',
     libraryTarget: 'umd',
-    library: 'ImageDiff'
+    library: 'ImageDiff',
   },
   externals: [{
     react: {
       root: 'React',
       commonjs2: 'react',
       commonjs: 'react',
-      amd: 'react'
-    }
+      amd: 'react',
+    },
   }],
   module: {
     loaders: [{
-        test: /\.js$/,
-        loader: 'babel-loader'
-    }]
-  }
+      test: /\.jsx?$/,
+      loader: 'babel-loader',
+    }],
+  },
 };
