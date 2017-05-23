@@ -254,13 +254,14 @@ class ImageDiff extends Component {
       width,
     } = this.getScaledDimensions();
     const {
-      width: _width,           // not used
-      height: _height,         // not used
-      after: _after,           // not used
-      before: _before,         // not used
-      type: _type,             // not used
-      value: _value,           // not used
-      imageStyle: _imageStyle, // not used
+      width: _width,             // not used
+      height: _height,           // not used
+      after: _after,             // not used
+      before: _before,           // not used
+      type: _type,               // not used
+      value: _value,             // not used
+      imageStyle: _imageStyle,   // not used
+      onImageLoad: _onImageLoad, // not used
       style,
       ...otherProps
     } = this.props;
