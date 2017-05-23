@@ -5,6 +5,7 @@
   "main": "dist/react-image-diff.js",
   "scripts": {
     "build": "webpack",
+    "start": "npm run watch",
     "watch": "webpack -w"
   },
   "repository": {
