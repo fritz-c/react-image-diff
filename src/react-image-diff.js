@@ -97,7 +97,7 @@ class ImageDiff extends Component {
       type: _type,     // not used
       value: _value,   // not used
       style,
-      ...otherProps,
+      ...otherProps
     } = this.props;
     return (
       <div
