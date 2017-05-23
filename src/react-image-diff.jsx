@@ -82,6 +82,16 @@ class ImageDiff extends Component {
       [`naturalHeight${type}`]: naturalHeight,
       [`naturalWidth${type}`]: naturalWidth,
     });
+
+    if (typeof this.props.onImageLoad === 'function') {
+      const position = type.toLowerCase(); // "before" or "after"
+      this.props.onImageLoad({
+        type: position,
+        src: this.props[position],
+        height: naturalHeight,
+        width: naturalWidth,
+      });
+    }
   }
 
   renderDifference(height, width) {
@@ -283,6 +293,7 @@ ImageDiff.propTypes = {
   width: PropTypes.number,
   style: PropTypes.shape({}),
   imageStyle: PropTypes.shape({}),
+  onImageLoad: PropTypes.func,
 };
 
 ImageDiff.defaultProps = {
@@ -291,6 +302,7 @@ ImageDiff.defaultProps = {
   width: null,
   style: {},
   imageStyle: {},
+  onImageLoad: null,
 };
 
 module.exports = ImageDiff;

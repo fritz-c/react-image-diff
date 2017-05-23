@@ -173,6 +173,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	          naturalWidth = _e$target.naturalWidth;
 
 	      this.setState((_setState = {}, _defineProperty(_setState, 'naturalHeight' + type, naturalHeight), _defineProperty(_setState, 'naturalWidth' + type, naturalWidth), _setState));
+
+	      if (typeof this.props.onImageLoad === 'function') {
+	        var position = type.toLowerCase(); // "before" or "after"
+	        this.props.onImageLoad({
+	          type: position,
+	          src: this.props[position],
+	          height: naturalHeight,
+	          width: naturalWidth
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'renderDifference',
@@ -400,7 +410,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: _propTypes2.default.number,
 	  width: _propTypes2.default.number,
 	  style: _propTypes2.default.shape({}),
-	  imageStyle: _propTypes2.default.shape({})
+	  imageStyle: _propTypes2.default.shape({}),
+	  onImageLoad: _propTypes2.default.func
 	};
 
 	ImageDiff.defaultProps = {
@@ -408,7 +419,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  height: null,
 	  width: null,
 	  style: {},
-	  imageStyle: {}
+	  imageStyle: {},
+	  onImageLoad: null
 	};
 
 	module.exports = ImageDiff;
