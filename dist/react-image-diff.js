@@ -239,11 +239,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      };
 
 	      var beforeStyle = _extends({
-	        border: this.props.showBorder ? '1px solid #f77' : 'none'
+	        border: '1px solid #f77'
 	      }, style);
 
 	      var afterStyle = _extends({
-	        border: this.props.showBorder ? '1px solid #63c363' : 'none',
+	        border: '1px solid #63c363',
 	        opacity: 1 - this.props.value
 	      }, style);
 
@@ -296,11 +296,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      };
 
 	      var beforeStyle = _extends({
-	        border: this.props.showBorder ? '1px solid #f77' : 'none'
+	        border: '1px solid #f77'
 	      }, style);
 
 	      var afterStyle = _extends({
-	        border: this.props.showBorder ? '1px solid #63c363' : 'none',
+	        border: '1px solid #63c363',
 	        right: 0
 	      }, style);
 
@@ -398,13 +398,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  type: _propTypes2.default.string.isRequired,
 	  value: _propTypes2.default.number,
 	  width: _propTypes2.default.number,
-	  showBorder: _propTypes2.default.bool,
 	  style: _propTypes2.default.shape({})
 	};
 
 	ImageDiff.defaultProps = {
 	  value: 1,
-	  showBorder: true,
 	  height: null,
 	  width: null,
 	  style: {}
