@@ -92,9 +92,11 @@ class ImageDiff extends Component {
       position: 'absolute',
       top: 0,
       left: 0,
+      ...this.props.imageStyle,
     };
     const afterStyle = {
       ...beforeStyle,
+      ...this.props.imageStyle,
     };
 
     return (
@@ -133,6 +135,7 @@ class ImageDiff extends Component {
       margin: 0,
       position: 'absolute',
       width,
+      ...this.props.imageStyle,
     };
 
     const beforeStyle = {
@@ -181,6 +184,7 @@ class ImageDiff extends Component {
       margin: 0,
       position: 'absolute',
       width,
+      ...this.props.imageStyle,
     };
 
     const beforeStyle = {
@@ -240,12 +244,13 @@ class ImageDiff extends Component {
       width,
     } = this.getScaledDimensions();
     const {
-      width: _width,   // not used
-      height: _height, // not used
-      after: _after,   // not used
-      before: _before, // not used
-      type: _type,     // not used
-      value: _value,   // not used
+      width: _width,           // not used
+      height: _height,         // not used
+      after: _after,           // not used
+      before: _before,         // not used
+      type: _type,             // not used
+      value: _value,           // not used
+      imageStyle: _imageStyle, // not used
       style,
       ...otherProps
     } = this.props;
@@ -277,6 +282,7 @@ ImageDiff.propTypes = {
   value: PropTypes.number,
   width: PropTypes.number,
   style: PropTypes.shape({}),
+  imageStyle: PropTypes.shape({}),
 };
 
 ImageDiff.defaultProps = {
@@ -284,6 +290,7 @@ ImageDiff.defaultProps = {
   height: null,
   width: null,
   style: {},
+  imageStyle: {},
 };
 
 module.exports = ImageDiff;

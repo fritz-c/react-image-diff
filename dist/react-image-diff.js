@@ -182,12 +182,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var style = {
 	        position: 'relative'
 	      };
-	      var beforeStyle = {
+	      var beforeStyle = _extends({
 	        position: 'absolute',
 	        top: 0,
 	        left: 0
-	      };
-	      var afterStyle = _extends({}, beforeStyle);
+	      }, this.props.imageStyle);
+	      var afterStyle = _extends({}, beforeStyle, this.props.imageStyle);
 
 	      return _react2.default.createElement(
 	        'div',
@@ -230,13 +230,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function renderFade(height, width) {
 	      var _this3 = this;
 
-	      var style = {
+	      var style = _extends({
 	        backgroundImage: 'url(' + bgImage + ')',
 	        height: height,
 	        margin: 0,
 	        position: 'absolute',
 	        width: width
-	      };
+	      }, this.props.imageStyle);
 
 	      var beforeStyle = _extends({
 	        border: '1px solid #f77'
@@ -287,13 +287,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function renderSwipe(height, width) {
 	      var _this4 = this;
 
-	      var style = {
+	      var style = _extends({
 	        backgroundImage: 'url(' + bgImage + ')',
 	        height: height,
 	        margin: 0,
 	        position: 'absolute',
 	        width: width
-	      };
+	      }, this.props.imageStyle);
 
 	      var beforeStyle = _extends({
 	        border: '1px solid #f77'
@@ -367,8 +367,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	          _before = _props2.before,
 	          _type = _props2.type,
 	          _value = _props2.value,
+	          _imageStyle = _props2.imageStyle,
 	          style = _props2.style,
-	          otherProps = _objectWithoutProperties(_props2, ['width', 'height', 'after', 'before', 'type', 'value', 'style']);
+	          otherProps = _objectWithoutProperties(_props2, ['width', 'height', 'after', 'before', 'type', 'value', 'imageStyle', 'style']);
 
 	      return _react2.default.createElement(
 	        'div',
@@ -398,14 +399,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  type: _propTypes2.default.string.isRequired,
 	  value: _propTypes2.default.number,
 	  width: _propTypes2.default.number,
-	  style: _propTypes2.default.shape({})
+	  style: _propTypes2.default.shape({}),
+	  imageStyle: _propTypes2.default.shape({})
 	};
 
 	ImageDiff.defaultProps = {
 	  value: 1,
 	  height: null,
 	  width: null,
-	  style: {}
+	  style: {},
+	  imageStyle: {}
 	};
 
 	module.exports = ImageDiff;
