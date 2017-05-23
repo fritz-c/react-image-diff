@@ -90,58 +90,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var _this = _possibleConstructorReturn(this, (ImageDiff.__proto__ || Object.getPrototypeOf(ImageDiff)).call(this));
 
-	    _this.renderFade = function (height, width) {
-	      var style = {
-	        backgroundImage: 'url(' + bgImage + ')',
-	        height: height,
-	        margin: 0,
-	        position: 'absolute',
-	        width: width
-	      };
-
-	      var beforeStyle = _extends({
-	        border: '1px solid #f77'
-	      }, style);
-
-	      var afterStyle = _extends({
-	        border: '1px solid #63c363',
-	        opacity: 1 - _this.props.value
-	      }, style);
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'ImageDiff__inner--fade', style: style },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'ImageDiff__before', style: beforeStyle },
-	          _react2.default.createElement('img', {
-	            src: _this.props.before,
-	            style: {
-	              maxHeight: height,
-	              maxWidth: width
-	            },
-	            onLoad: function onLoad(e) {
-	              return _this.handleImgLoad(e, 'Before');
-	            }
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'ImageDiff__after', style: afterStyle },
-	          _react2.default.createElement('img', {
-	            src: _this.props.after,
-	            style: {
-	              maxHeight: height,
-	              maxWidth: width
-	            },
-	            onLoad: function onLoad(e) {
-	              return _this.handleImgLoad(e, 'After');
-	            }
-	          })
-	        )
-	      );
-	    };
-
 	    _this.handleImgLoad = _this.handleImgLoad.bind(_this);
 	    _this.getScaledDimensions = _this.getScaledDimensions.bind(_this);
 
@@ -155,17 +103,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  _createClass(ImageDiff, [{
-	    key: 'handleImgLoad',
-	    value: function handleImgLoad(e, type) {
-	      var _setState;
-
-	      var _e$target = e.target,
-	          naturalHeight = _e$target.naturalHeight,
-	          naturalWidth = _e$target.naturalWidth;
-
-	      this.setState((_setState = {}, _defineProperty(_setState, 'naturalHeight' + type, naturalHeight), _defineProperty(_setState, 'naturalWidth' + type, naturalWidth), _setState));
-	    }
-	  }, {
 	    key: 'getScaledDimensions',
 	    value: function getScaledDimensions() {
 	      var getDimensions = function getDimensions(maxHeight, maxWidth, naturalHeight, naturalWidth) {
@@ -191,8 +128,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          naturalWidthAfter = _state.naturalWidthAfter,
 	          naturalHeightAfter = _state.naturalHeightAfter;
 	      var _props = this.props,
-	          maxHeight = _props.width,
-	          maxWidth = _props.height;
+	          maxWidth = _props.width,
+	          maxHeight = _props.height;
 
 
 	      var height = 0;
@@ -227,6 +164,196 @@ return /******/ (function(modules) { // webpackBootstrap
 	      };
 	    }
 	  }, {
+	    key: 'handleImgLoad',
+	    value: function handleImgLoad(e, type) {
+	      var _setState;
+
+	      var _e$target = e.target,
+	          naturalHeight = _e$target.naturalHeight,
+	          naturalWidth = _e$target.naturalWidth;
+
+	      this.setState((_setState = {}, _defineProperty(_setState, 'naturalHeight' + type, naturalHeight), _defineProperty(_setState, 'naturalWidth' + type, naturalWidth), _setState));
+	    }
+	  }, {
+	    key: 'renderDifference',
+	    value: function renderDifference(height, width) {
+	      var _this2 = this;
+
+	      var style = {
+	        position: 'relative'
+	      };
+	      var beforeStyle = {
+	        position: 'absolute',
+	        top: 0,
+	        left: 0
+	      };
+	      var afterStyle = _extends({}, beforeStyle);
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'ImageDiff_inner--difference', style: style },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ImageDiff__before', style: beforeStyle },
+	          _react2.default.createElement('img', {
+	            alt: 'Before',
+	            src: this.props.before,
+	            style: {
+	              maxHeight: height,
+	              maxWidth: width
+	            },
+	            onLoad: function onLoad(e) {
+	              return _this2.handleImgLoad(e, 'Before');
+	            }
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ImageDiff__after', style: afterStyle },
+	          _react2.default.createElement('img', {
+	            alt: 'After',
+	            src: this.props.after,
+	            style: {
+	              maxHeight: height,
+	              maxWidth: width,
+	              mixBlendMode: 'difference'
+	            },
+	            onLoad: function onLoad(e) {
+	              return _this2.handleImgLoad(e, 'After');
+	            }
+	          })
+	        )
+	      );
+	    }
+	  }, {
+	    key: 'renderFade',
+	    value: function renderFade(height, width) {
+	      var _this3 = this;
+
+	      var style = {
+	        backgroundImage: 'url(' + bgImage + ')',
+	        height: height,
+	        margin: 0,
+	        position: 'absolute',
+	        width: width
+	      };
+
+	      var beforeStyle = _extends({
+	        border: this.props.showBorder ? '1px solid #f77' : 'none'
+	      }, style);
+
+	      var afterStyle = _extends({
+	        border: this.props.showBorder ? '1px solid #63c363' : 'none',
+	        opacity: 1 - this.props.value
+	      }, style);
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'ImageDiff__inner--fade', style: style },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ImageDiff__before', style: beforeStyle },
+	          _react2.default.createElement('img', {
+	            alt: 'Before',
+	            src: this.props.before,
+	            style: {
+	              maxHeight: height,
+	              maxWidth: width
+	            },
+	            onLoad: function onLoad(e) {
+	              return _this3.handleImgLoad(e, 'Before');
+	            }
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ImageDiff__after', style: afterStyle },
+	          _react2.default.createElement('img', {
+	            alt: 'After',
+	            src: this.props.after,
+	            style: {
+	              maxHeight: height,
+	              maxWidth: width
+	            },
+	            onLoad: function onLoad(e) {
+	              return _this3.handleImgLoad(e, 'After');
+	            }
+	          })
+	        )
+	      );
+	    }
+	  }, {
+	    key: 'renderSwipe',
+	    value: function renderSwipe(height, width) {
+	      var _this4 = this;
+
+	      var style = {
+	        backgroundImage: 'url(' + bgImage + ')',
+	        height: height,
+	        margin: 0,
+	        position: 'absolute',
+	        width: width
+	      };
+
+	      var beforeStyle = _extends({
+	        border: this.props.showBorder ? '1px solid #f77' : 'none'
+	      }, style);
+
+	      var afterStyle = _extends({
+	        border: this.props.showBorder ? '1px solid #63c363' : 'none',
+	        right: 0
+	      }, style);
+
+	      var swiperStyle = {
+	        borderLeft: '1px solid #999',
+	        height: height + 2,
+	        margin: 0,
+	        overflow: 'hidden',
+	        position: 'absolute',
+	        right: -2,
+	        width: width * (1 - this.props.value)
+	      };
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'ImageDiff__inner--swipe', style: style },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ImageDiff__before', style: beforeStyle },
+	          _react2.default.createElement('img', {
+	            alt: 'Before',
+	            src: this.props.before,
+	            style: {
+	              maxHeight: height,
+	              maxWidth: width
+	            },
+	            onLoad: function onLoad(e) {
+	              return _this4.handleImgLoad(e, 'Before');
+	            }
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ImageDiff--swiper', style: swiperStyle },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ImageDiff__after', style: afterStyle },
+	            _react2.default.createElement('img', {
+	              alt: 'After',
+	              src: this.props.after,
+	              style: {
+	                maxHeight: height,
+	                maxWidth: width
+	              },
+	              onLoad: function onLoad(e) {
+	                return _this4.handleImgLoad(e, 'After');
+	              }
+	            })
+	          )
+	        )
+	      );
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _getScaledDimensions = this.getScaledDimensions(),
@@ -259,124 +386,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.props.type === 'swipe' ? this.renderSwipe(height, width) : null
 	      );
 	    }
-	  }, {
-	    key: 'renderDifference',
-	    value: function renderDifference(height, width) {
-	      var _this2 = this;
-
-	      var style = {
-	        position: 'relative'
-	      };
-	      var beforeStyle = {
-	        position: 'absolute',
-	        top: 0,
-	        left: 0
-	      };
-	      var afterStyle = _extends({}, beforeStyle);
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'ImageDiff_inner--difference', style: style },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'ImageDiff__before', style: beforeStyle },
-	          _react2.default.createElement('img', {
-	            src: this.props.before,
-	            style: {
-	              maxHeight: height,
-	              maxWidth: width
-	            },
-	            onLoad: function onLoad(e) {
-	              return _this2.handleImgLoad(e, 'Before');
-	            }
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'ImageDiff__after', style: afterStyle },
-	          _react2.default.createElement('img', {
-	            src: this.props.after,
-	            style: {
-	              maxHeight: height,
-	              maxWidth: width,
-	              mixBlendMode: 'difference'
-	            },
-	            onLoad: function onLoad(e) {
-	              return _this2.handleImgLoad(e, 'After');
-	            }
-	          })
-	        )
-	      );
-	    }
-	  }, {
-	    key: 'renderSwipe',
-	    value: function renderSwipe(height, width) {
-	      var _this3 = this;
-
-	      var style = {
-	        backgroundImage: 'url(' + bgImage + ')',
-	        height: height,
-	        margin: 0,
-	        position: 'absolute',
-	        width: width
-	      };
-
-	      var beforeStyle = _extends({
-	        border: '1px solid #f77'
-	      }, style);
-
-	      var afterStyle = _extends({
-	        border: '1px solid #63c363',
-	        right: 0
-	      }, style);
-
-	      var swiperStyle = {
-	        borderLeft: '1px solid #999',
-	        height: height + 2,
-	        margin: 0,
-	        overflow: 'hidden',
-	        position: 'absolute',
-	        right: -2,
-	        width: width * (1 - this.props.value)
-	      };
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'ImageDiff__inner--swipe', style: style },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'ImageDiff__before', style: beforeStyle },
-	          _react2.default.createElement('img', {
-	            src: this.props.before,
-	            style: {
-	              maxHeight: height,
-	              maxWidth: width
-	            },
-	            onLoad: function onLoad(e) {
-	              return _this3.handleImgLoad(e, 'Before');
-	            }
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'ImageDiff--swiper', style: swiperStyle },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ImageDiff__after', style: afterStyle },
-	            _react2.default.createElement('img', {
-	              src: this.props.after,
-	              style: {
-	                maxHeight: height,
-	                maxWidth: width
-	              },
-	              onLoad: function onLoad(e) {
-	                return _this3.handleImgLoad(e, 'After');
-	              }
-	            })
-	          )
-	        )
-	      );
-	    }
 	  }]);
 
 	  return ImageDiff;
@@ -388,11 +397,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  height: _propTypes2.default.number,
 	  type: _propTypes2.default.string.isRequired,
 	  value: _propTypes2.default.number,
-	  width: _propTypes2.default.number
+	  width: _propTypes2.default.number,
+	  showBorder: _propTypes2.default.bool,
+	  style: _propTypes2.default.shape({})
 	};
 
 	ImageDiff.defaultProps = {
-	  value: 1
+	  value: 1,
+	  showBorder: true,
+	  height: null,
+	  width: null,
+	  style: {}
 	};
 
 	module.exports = ImageDiff;
