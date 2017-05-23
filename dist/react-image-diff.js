@@ -106,8 +106,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'getScaledDimensions',
 	    value: function getScaledDimensions() {
 	      var getDimensions = function getDimensions(maxHeight, maxWidth, naturalHeight, naturalWidth) {
-	        var heightRatio = typeof maxHeight !== 'undefined' ? naturalHeight / maxHeight : 1;
-	        var widthRatio = typeof maxWidth !== 'undefined' ? naturalWidth / maxWidth : 1;
+	        var heightRatio = typeof maxHeight !== 'undefined' && maxHeight !== null ? naturalHeight / maxHeight : 1;
+	        var widthRatio = typeof maxWidth !== 'undefined' && maxWidth !== null ? naturalWidth / maxWidth : 1;
 
 	        // Use max to prevent scaling up the image
 	        var divisor = Math.max(1, widthRatio);

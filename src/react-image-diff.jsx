@@ -19,8 +19,8 @@ class ImageDiff extends Component {
 
   getScaledDimensions() {
     const getDimensions = (maxHeight, maxWidth, naturalHeight, naturalWidth) => {
-      const heightRatio = typeof maxHeight !== 'undefined' ? (naturalHeight / maxHeight) : 1;
-      const widthRatio = typeof maxWidth !== 'undefined' ? (naturalWidth / maxWidth) : 1;
+      const heightRatio = (typeof maxHeight !== 'undefined' && maxHeight !== null) ? (naturalHeight / maxHeight) : 1;
+      const widthRatio = (typeof maxWidth !== 'undefined' && maxWidth !== null) ? (naturalWidth / maxWidth) : 1;
 
       // Use max to prevent scaling up the image
       let divisor = Math.max(1, widthRatio);
