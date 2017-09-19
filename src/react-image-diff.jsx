@@ -258,6 +258,8 @@ class ImageDiff extends Component {
       height: _height,           // not used
       after: _after,             // not used
       before: _before,           // not used
+      afterAlt: _afterAlt,       // not used
+      beforeAlt: _beforeAlt,     // not used
       type: _type,               // not used
       value: _value,             // not used
       imageStyle: _imageStyle,   // not used
