@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const bgImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABlBMVEX5+fn///8pDrwNAAAAFElEQVQI12NgsP/AQAz+f4CBGAwAJIIdTTn0+w0AAAAASUVORK5CYII=';
+const bgImage =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABlBMVEX5+fn///8pDrwNAAAAFElEQVQI12NgsP/AQAz+f4CBGAwAJIIdTTn0+w0AAAAASUVORK5CYII=';
 
 class ImageDiff extends Component {
   constructor() {
@@ -18,9 +19,20 @@ class ImageDiff extends Component {
   }
 
   getScaledDimensions() {
-    const getDimensions = (maxHeight, maxWidth, naturalHeight, naturalWidth) => {
-      const heightRatio = (typeof maxHeight !== 'undefined' && maxHeight !== null) ? (naturalHeight / maxHeight) : 1;
-      const widthRatio = (typeof maxWidth !== 'undefined' && maxWidth !== null) ? (naturalWidth / maxWidth) : 1;
+    const getDimensions = (
+      maxHeight,
+      maxWidth,
+      naturalHeight,
+      naturalWidth
+    ) => {
+      const heightRatio =
+        typeof maxHeight !== 'undefined' && maxHeight !== null
+          ? naturalHeight / maxHeight
+          : 1;
+      const widthRatio =
+        typeof maxWidth !== 'undefined' && maxWidth !== null
+          ? naturalWidth / maxWidth
+          : 1;
 
       // Use max to prevent scaling up the image
       let divisor = Math.max(1, widthRatio);
@@ -41,10 +53,7 @@ class ImageDiff extends Component {
       naturalWidthAfter,
       naturalHeightAfter,
     } = this.state;
-    const {
-      width: maxWidth,
-      height: maxHeight,
-    } = this.props;
+    const { width: maxWidth, height: maxHeight } = this.props;
 
     let height = 0;
     let width = 0;
@@ -54,14 +63,18 @@ class ImageDiff extends Component {
     let widthAfter = 0;
 
     if (naturalHeightBefore && naturalHeightAfter) {
-      ({
-        height: heightBefore,
-        width: widthBefore,
-      } = getDimensions(maxHeight, maxWidth, naturalHeightBefore, naturalWidthBefore));
-      ({
-        height: heightAfter,
-        width: widthAfter,
-      } = getDimensions(maxHeight, maxWidth, naturalHeightAfter, naturalWidthAfter));
+      ({ height: heightBefore, width: widthBefore } = getDimensions(
+        maxHeight,
+        maxWidth,
+        naturalHeightBefore,
+        naturalWidthBefore
+      ));
+      ({ height: heightAfter, width: widthAfter } = getDimensions(
+        maxHeight,
+        maxWidth,
+        naturalHeightAfter,
+        naturalWidthAfter
+      ));
       height = Math.max(heightBefore, heightAfter);
       width = Math.max(widthBefore, widthAfter);
     }
@@ -249,20 +262,17 @@ class ImageDiff extends Component {
   }
 
   render() {
+    const { height, width } = this.getScaledDimensions();
     const {
-      height,
-      width,
-    } = this.getScaledDimensions();
-    const {
-      width: _width,             // not used
-      height: _height,           // not used
-      after: _after,             // not used
-      before: _before,           // not used
-      afterAlt: _afterAlt,       // not used
-      beforeAlt: _beforeAlt,     // not used
-      type: _type,               // not used
-      value: _value,             // not used
-      imageStyle: _imageStyle,   // not used
+      width: _width, // not used
+      height: _height, // not used
+      after: _after, // not used
+      before: _before, // not used
+      afterAlt: _afterAlt, // not used
+      beforeAlt: _beforeAlt, // not used
+      type: _type, // not used
+      value: _value, // not used
+      imageStyle: _imageStyle, // not used
       onImageLoad: _onImageLoad, // not used
       style,
       ...otherProps
@@ -279,7 +289,9 @@ class ImageDiff extends Component {
         }}
         {...otherProps}
       >
-        {this.props.type === 'difference' ? this.renderDifference(height, width) : null}
+        {this.props.type === 'difference'
+          ? this.renderDifference(height, width)
+          : null}
         {this.props.type === 'fade' ? this.renderFade(height, width) : null}
         {this.props.type === 'swipe' ? this.renderSwipe(height, width) : null}
       </div>
