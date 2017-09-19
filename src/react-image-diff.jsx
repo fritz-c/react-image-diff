@@ -77,6 +77,20 @@ class ImageDiff extends Component {
       ));
       height = Math.max(heightBefore, heightAfter);
       width = Math.max(widthBefore, widthAfter);
+    } else if (naturalHeightBefore) {
+      ({ height, width } = getDimensions(
+        maxHeight,
+        maxWidth,
+        naturalHeightBefore,
+        naturalWidthBefore
+      ));
+    } else if (naturalHeightAfter) {
+      ({ height, width } = getDimensions(
+        maxHeight,
+        maxWidth,
+        naturalHeightAfter,
+        naturalWidthAfter
+      ));
     }
 
     return {
