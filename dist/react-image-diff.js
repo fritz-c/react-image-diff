@@ -375,12 +375,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	          _height = _props2.height,
 	          _after = _props2.after,
 	          _before = _props2.before,
+	          _afterAlt = _props2.afterAlt,
+	          _beforeAlt = _props2.beforeAlt,
 	          _type = _props2.type,
 	          _value = _props2.value,
 	          _imageStyle = _props2.imageStyle,
 	          _onImageLoad = _props2.onImageLoad,
 	          style = _props2.style,
-	          otherProps = _objectWithoutProperties(_props2, ['width', 'height', 'after', 'before', 'type', 'value', 'imageStyle', 'onImageLoad', 'style']);
+	          otherProps = _objectWithoutProperties(_props2, ['width', 'height', 'after', 'before', 'afterAlt', 'beforeAlt', 'type', 'value', 'imageStyle', 'onImageLoad', 'style']);
 
 	      return _react2.default.createElement(
 	        'div',
