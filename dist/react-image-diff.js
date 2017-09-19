@@ -206,7 +206,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          'div',
 	          { className: 'ImageDiff__before', style: beforeStyle },
 	          _react2.default.createElement('img', {
-	            alt: 'Before',
+	            alt: this.props.beforeAlt,
 	            src: this.props.before,
 	            style: {
 	              maxHeight: height,
@@ -221,7 +221,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          'div',
 	          { className: 'ImageDiff__after', style: afterStyle },
 	          _react2.default.createElement('img', {
-	            alt: 'After',
+	            alt: this.props.afterAlt,
 	            src: this.props.after,
 	            style: {
 	              maxHeight: height,
@@ -264,7 +264,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          'div',
 	          { className: 'ImageDiff__before', style: beforeStyle },
 	          _react2.default.createElement('img', {
-	            alt: 'Before',
+	            alt: this.props.beforeAlt,
 	            src: this.props.before,
 	            style: {
 	              maxHeight: height,
@@ -279,7 +279,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          'div',
 	          { className: 'ImageDiff__after', style: afterStyle },
 	          _react2.default.createElement('img', {
-	            alt: 'After',
+	            alt: this.props.afterAlt,
 	            src: this.props.after,
 	            style: {
 	              maxHeight: height,
@@ -331,7 +331,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          'div',
 	          { className: 'ImageDiff__before', style: beforeStyle },
 	          _react2.default.createElement('img', {
-	            alt: 'Before',
+	            alt: this.props.beforeAlt,
 	            src: this.props.before,
 	            style: {
 	              maxHeight: height,
@@ -349,7 +349,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            'div',
 	            { className: 'ImageDiff__after', style: afterStyle },
 	            _react2.default.createElement('img', {
-	              alt: 'After',
+	              alt: this.props.afterAlt,
 	              src: this.props.after,
 	              style: {
 	                maxHeight: height,
@@ -406,6 +406,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	ImageDiff.propTypes = {
 	  after: _propTypes2.default.string.isRequired,
 	  before: _propTypes2.default.string.isRequired,
+	  beforeAlt: _propTypes2.default.string,
+	  afterAlt: _propTypes2.default.string,
 	  height: _propTypes2.default.number,
 	  type: _propTypes2.default.string.isRequired,
 	  value: _propTypes2.default.number,
@@ -421,7 +423,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  width: null,
 	  style: {},
 	  imageStyle: {},
-	  onImageLoad: null
+	  onImageLoad: null,
+	  beforeAlt: 'Before',
+	  afterAlt: 'After'
 	};
 
 	module.exports = ImageDiff;

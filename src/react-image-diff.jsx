@@ -113,7 +113,7 @@ class ImageDiff extends Component {
       <div className="ImageDiff_inner--difference" style={style}>
         <div className="ImageDiff__before" style={beforeStyle}>
           <img
-            alt="Before"
+            alt={this.props.beforeAlt}
             src={this.props.before}
             style={{
               maxHeight: height,
@@ -124,7 +124,7 @@ class ImageDiff extends Component {
         </div>
         <div className="ImageDiff__after" style={afterStyle}>
           <img
-            alt="After"
+            alt={this.props.afterAlt}
             src={this.props.after}
             style={{
               maxHeight: height,
@@ -163,7 +163,7 @@ class ImageDiff extends Component {
       <div className="ImageDiff__inner--fade" style={style}>
         <div className="ImageDiff__before" style={beforeStyle}>
           <img
-            alt="Before"
+            alt={this.props.beforeAlt}
             src={this.props.before}
             style={{
               maxHeight: height,
@@ -174,7 +174,7 @@ class ImageDiff extends Component {
         </div>
         <div className="ImageDiff__after" style={afterStyle}>
           <img
-            alt="After"
+            alt={this.props.afterAlt}
             src={this.props.after}
             style={{
               maxHeight: height,
@@ -222,7 +222,7 @@ class ImageDiff extends Component {
       <div className="ImageDiff__inner--swipe" style={style}>
         <div className="ImageDiff__before" style={beforeStyle}>
           <img
-            alt="Before"
+            alt={this.props.beforeAlt}
             src={this.props.before}
             style={{
               maxHeight: height,
@@ -234,7 +234,7 @@ class ImageDiff extends Component {
         <div className="ImageDiff--swiper" style={swiperStyle}>
           <div className="ImageDiff__after" style={afterStyle}>
             <img
-              alt="After"
+              alt={this.props.afterAlt}
               src={this.props.after}
               style={{
                 maxHeight: height,
@@ -288,6 +288,8 @@ class ImageDiff extends Component {
 ImageDiff.propTypes = {
   after: PropTypes.string.isRequired,
   before: PropTypes.string.isRequired,
+  beforeAlt: PropTypes.string,
+  afterAlt: PropTypes.string,
   height: PropTypes.number,
   type: PropTypes.string.isRequired,
   value: PropTypes.number,
@@ -304,6 +306,8 @@ ImageDiff.defaultProps = {
   style: {},
   imageStyle: {},
   onImageLoad: null,
+  beforeAlt: 'Before',
+  afterAlt: 'After',
 };
 
 module.exports = ImageDiff;

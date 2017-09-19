@@ -34,6 +34,8 @@ class Component extends React.Component {
 
 * after: string - url to after image
 * before: string - url to before image
+* afterAlt: string - `<img>` _alt_ text for after image
+* beforeAlt: string - `<img>` _alt_ text for before image
 * height: number - height in pixels
 * width: number - width in pixels
 * type: string - type of image comparison (difference, fade, or swipe)
