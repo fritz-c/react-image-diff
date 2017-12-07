@@ -1,16 +1,17 @@
 {
-  "name": "react-image-diff",
-  "version": "0.1.1",
+  "name": "@fritz-c/react-image-diff",
+  "version": "0.2.0",
   "description": "Highlight differences between images",
   "main": "dist/react-image-diff.js",
   "scripts": {
     "build": "webpack",
     "start": "npm run watch",
-    "watch": "webpack -w"
+    "watch": "webpack -w",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cezary/react-image-diff.git"
+    "url": "https://github.com/fritz-c/react-image-diff.git"
   },
   "keywords": [
     "diff",
@@ -20,9 +21,9 @@
   "author": "Cezary Wojtkowski <cezary@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cezary/react-image-diff/issues"
+    "url": "https://github.com/fritz-c/react-image-diff/issues"
   },
-  "homepage": "https://github.com/cezary/react-image-diff",
+  "homepage": "https://github.com/fritz-c/react-image-diff",
   "peerDependencies": {
     "react": ">=15.0.0",
     "react-dom": ">=15.0.0"
@@ -35,15 +36,15 @@
     "babel-preset-stage-0": "^6.5.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
-    "eslint-config-prettier": "^2.5.0",
-    "eslint-plugin-import": "^2.2.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
-    "eslint-plugin-react": "^7.0.1",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "eslint-plugin-react": "^7.5.1",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
     "webpack": "^1.13.0"
   },
   "dependencies": {
-    "prop-types": "^15.5.8"
+    "prop-types": "^15.6.0"
   }
 }
